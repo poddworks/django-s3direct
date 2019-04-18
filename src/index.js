@@ -74,12 +74,13 @@ const beginUpload = element => {
   element.className = 's3direct progress-active';
 };
 
-const finishUpload = (element, endpoint, bucket, objectKey) => {
+const finishUpload = (element, customDomain, objectKey) => {
   const link = element.querySelector('.file-link');
   const url = element.querySelector('.file-url');
-  url.value = endpoint + '/' + bucket + '/' + objectKey;
-  link.setAttribute('href', url.value);
-  link.innerHTML = parseNameFromUrl(url.value)
+  const href = 'https://' + customDomain + '/' + objectKey;
+  url.value = objectKey;
+  link.setAttribute('href', href);
+  link.innerHTML = parseNameFromUrl(href)
     .split('/')
     .pop();
   element.className = 's3direct link-active';
@@ -209,8 +210,7 @@ const initiateUpload = (element, signingUrl, uploadParameters, file, dest) => {
       s3Objkey => {
         finishUpload(
           element,
-          uploadParameters.endpoint,
-          uploadParameters.bucket,
+          uploadParameters.custom_domain,
           s3Objkey
         );
       },

@@ -78,7 +78,8 @@ def get_upload_params(request):
         'region': region,
         'bucket': bucket,
         'endpoint': endpoint,
-        'acl': dest.get('acl') or 'public-read',
+        'custom_domain': settings.AWS_S3_CUSTOM_DOMAIN,
+        'acl': None,
         'allow_existence_optimization': dest.get('allow_existence_optimization', False)
     }
 

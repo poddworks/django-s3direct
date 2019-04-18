@@ -23,7 +23,7 @@ class S3DirectWidget(widgets.TextInput):
         super(S3DirectWidget, self).__init__(*args, **kwargs)
 
     def render(self, name, value, **kwargs):
-        file_url = value or ''
+        file_url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{value}' or ''
         csrf_cookie_name = getattr(settings, 'CSRF_COOKIE_NAME', 'csrftoken')
 
         ctx = {
