@@ -60,8 +60,7 @@ def get_upload_params(request):
         resp = json.dumps({'error': 'S3 region config missing.'})
         return HttpResponseServerError(resp, content_type='application/json')
 
-    endpoint = dest.get('endpoint',
-                        getattr(settings, 'AWS_S3_ENDPOINT_URL', None))
+    endpoint = dest.get('endpoint', f'https://s3-{region}.amazonaws.com')
     if not endpoint:
         resp = json.dumps({'error': 'S3 endpoint config missing.'})
         return HttpResponseServerError(resp, content_type='application/json')
