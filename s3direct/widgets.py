@@ -33,6 +33,7 @@ class S3DirectWidget(widgets.TextInput):
             'name': name,
             'csrf_cookie_name': csrf_cookie_name,
             'file_url': file_url,
+            'file_value': value,
             'file_name': os.path.basename(urlunquote_plus(file_url)),
         }
 
