@@ -83,7 +83,7 @@ def get_upload_params(request):
     }
 
     optional_params = [
-        'content_disposition', 'cache_control', 'server_side_encryption'
+        'content_disposition', 'cache_control', 'server_side_encryption', 'server_side_encryption_kms_key_id'
     ]
 
     for optional_param in optional_params:

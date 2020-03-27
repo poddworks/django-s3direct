@@ -173,7 +173,11 @@ S3DIRECT_DESTINATIONS = {
 
         # "server_side_encryption" [optional] Use serverside encryption
         #                          String: encrytion standard
-        'server_side_encryption': 'AES256',
+        'server_side_encryption': 'aws:kms',
+
+        # "server_side_encryption_kms_key_id" [optional] Required if "server_side_encryption" set
+        #                                     String: Amazone Key Management System Customer Key Arn
+        'server_side_encryption_kms_key_id': 'arn:aws:kms:us-east-1:111122223333:key/0695f802-503c-40n2-d17d-16d702f79f01'
 
         # "allow_existence_optimization" [optional] Checks to see if file already exists,
         #                                returns the URL to the object if so (no upload)

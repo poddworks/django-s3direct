@@ -105,12 +105,19 @@ const getCsrfToken = element => {
   return token;
 };
 
-const generateAmzInitHeaders = (acl, serverSideEncryption, sessionToken) => {
+const generateAmzInitHeaders = (acl, serverSideEncryption, serverSideEncryptionKMSKeyId, sessionToken) => {
   const headers = {};
-  if (acl) headers['x-amz-acl'] = acl;
-  if (sessionToken) headers['x-amz-security-token'] = sessionToken;
+  if (acl) {
+    headers['x-amz-acl'] = acl;
+  }
+  if (sessionToken) {
+    headers['x-amz-security-token'] = sessionToken;
+  }
   if (serverSideEncryption) {
     headers['x-amz-server-side-encryption'] = serverSideEncryption;
+  }
+  if (serverSideEncryptionKMSKeyId) {
+    headers['x-amz-server-side-encryption-aws-kms-key-id'] = serverSideEncryptionKMSKeyId;
   }
   return headers;
 };
@@ -179,6 +186,7 @@ const initiateUpload = (element, signingUrl, uploadParameters, file, dest) => {
     xAmzHeadersAtInitiate: generateAmzInitHeaders(
       uploadParameters.acl,
       uploadParameters.server_side_encryption,
+      uploadParameters.server_side_encryption_kms_key_id,
       uploadParameters.session_token
     ),
     progress: (progressRatio, stats) => {
